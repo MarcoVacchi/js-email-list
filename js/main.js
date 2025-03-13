@@ -16,13 +16,16 @@ Thunder Client (VSCode Extension)*/
 
 
 const endPoint = "https://flynn.boolean.careers/exercises/api/random/mail";
-let emails = ''
 const emailList = document.getElementById("email-list");
+const button = document.getElementById("button");
+
+function refreshEmail(){
+let emails = ''
 let count = 0;
-let countNumber = 0;
+let countNumber = 1;
 //console.log(emailList);
 
-for(let i = 0; i <= 10; i++){
+for(let i = 0; i < 10; i++){
 
  axios.get(endPoint)
  .then(response => {
@@ -34,16 +37,25 @@ for(let i = 0; i <= 10; i++){
 
     count ++;
     countNumber ++;
-    emailList.innerHTML = emails;
-    /*
+    
     if( count === 10){
       // console.log(emails);
         emailList.innerHTML = emails;
-    } */
+        button.addEventListener("click", refreshEmail);
+    } 
 })
     .catch(error => {
         console.error("Errore:", error);
         //console.log(error);
     });
+ }
  
 }
+
+// invoco la funzione per richiamare tutto il programma
+
+refreshEmail();
+
+
+
+
